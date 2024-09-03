@@ -65,25 +65,28 @@ instance Show a => Show (Trie a) where
 
 --Ejercicio 1
 procVacio :: Procesador a b
-procVacio = undefined
+procVacio = []
 
 procId :: Procesador a a
-procId = undefined
+procId a = [a]
 
 procCola :: Procesador [a] a
-procCola = undefined
+procCola l = if length l > 0 then tail l else [
 
 procHijosRose :: Procesador (RoseTree a) (RoseTree a)
-procHijosRose = undefined
+procHijosRose (Rose children) = Rose children
 
 procHijosAT :: Procesador (AT a) (AT a)
-procHijosAT = undefined
+procHijosAT Nil = []
+procHijosAt (Tern a b c) = [a, b, c]
 
+-- TODO: me parece que el TrieNodo Nothing esta raro
 procRaizTrie :: Procesador (Trie a) (Maybe a)
-procRaizTrie  = undefined
+procRaizTrie (TrieNodo Nothing b) = [Nothing]
+procRaizTrie (TrieNodo t ) = [t]
 
 procSubTries :: Procesador (Trie a) (Char, Trie a)
-procSubTries  = undefined
+procSubTries (TrieNodo hijos) = hijos
 
 
 --Ejercicio 2
