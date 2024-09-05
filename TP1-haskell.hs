@@ -121,12 +121,12 @@ inorder :: AT a -> [a]
 inorder = foldAT(\r i c d -> (i ++ c ++ [r] ++ d)) []
 
 postorder :: AT a -> [a]
-postorder = foldAT(\r i c d -> reverse (r : (d ++ c ++ i))) []
+postorder = foldAT(\r i c d -> reverse (flip (:) (d ++ c ++ i) r)) []
  
 --Ejercicio 5
 
 preorderRose :: Procesador (RoseTree a) a
-preorderRose = undefined
+preorderRose = foldRose(\r _ h -> r : concat h)
 
 hojasRose :: Procesador (RoseTree a) a
 hojasRose = undefined
