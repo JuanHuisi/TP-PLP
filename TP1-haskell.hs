@@ -98,10 +98,10 @@ foldAT f b (Tern r i c d)  = f r (foldAT f b i)  (foldAT f b c) (foldAT f b d)
 foldRose :: (a -> [RoseTree a] -> [b] -> b) -> RoseTree a -> b
 foldRose fRose (Rose n hijos) = fRose n hijos (map (foldRose fRose) hijos)
 
-
-
---foldTrie :: undefined
+-- data Trie a = TrieNodo (Maybe a) [(Char, Trie a)] deriving Eq
+--foldTrie :: (Maybe a -> [(Char, b)] -> [b]) -> Trie a -> b
 foldTrie = undefined
+
 
 
 --Ejercicio 3
@@ -113,15 +113,16 @@ sufijos = undefined
 
 
 --Ejercicio 4
---preorder :: undefined
-preorder = undefined
+preorder :: AT a -> [a]
+preorder = foldAT(\r i c d -> r : (i ++ c ++ d)) []
 
---inorder :: undefined
-inorder = undefined
 
---postorder :: undefined
-postorder = undefined
+inorder :: AT a -> [a]
+inorder = foldAT(\r i c d -> (i ++ c ++ [r] ++ d)) []
 
+postorder :: AT a -> [a]
+postorder = foldAT(\r i c d -> flip ((:) (i ++ c ++ d) r))
+ 
 --Ejercicio 5
 
 preorderRose :: Procesador (RoseTree a) a
