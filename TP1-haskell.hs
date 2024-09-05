@@ -106,11 +106,11 @@ foldTrie = undefined
 
 --Ejercicio 3
 unoxuno :: Procesador [a] [a]
-unoxuno = undefined
+unoxuno = foldr(\x acc -> [x] : acc) []
 
 sufijos :: Procesador [a] [a]
-sufijos = undefined
-
+sufijos = foldr (\c acc -> (c : if null (head acc) then [] else head acc) : acc) [[]];
+--sufijos = foldr(\x acc -> if null(head acc) then x : acc else (x:head acc) : acc) [[]]
 
 --Ejercicio 4
 preorder :: AT a -> [a]
@@ -129,7 +129,7 @@ preorderRose :: Procesador (RoseTree a) a
 preorderRose = foldRose(\r _ h -> r : concat h)
 
 hojasRose :: Procesador (RoseTree a) a
-hojasRose = undefined
+hojasRose = foldRose(\r x h -> if length x == 0 then r : concat h else concat h )
 
 ramasRose :: Procesador (RoseTree a) [a]
 ramasRose = undefined
@@ -143,7 +143,7 @@ caminos = undefined
 
 --Ejercicio 7
 
---palabras :: undefined
+palabras :: undefined
 palabras = undefined
 
 
