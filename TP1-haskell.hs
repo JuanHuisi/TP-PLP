@@ -95,8 +95,8 @@ foldAT :: (a -> b -> b -> b -> b) -> b -> AT a -> b
 foldAT _ b Nil = b 
 foldAT f b (Tern r i c d)  = f r (foldAT f b i)  (foldAT f b c) (foldAT f b d)
 
---foldRose :: undefined
-foldRose = undefined
+foldRose :: [a -> [RoseTree a] -> [b] -> b] -> RoseTree a -> b
+foldRose fRose (Rose n hijos) = fRose n hijos (map foldRose fRose hijos)
 
 --foldTrie :: undefined
 foldTrie = undefined
