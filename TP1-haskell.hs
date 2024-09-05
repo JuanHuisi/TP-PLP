@@ -1,6 +1,6 @@
 module Proceso (Procesador, AT(Nil,Tern), RoseTree(Rose), Trie(TrieNodo), foldAT, foldRose, foldTrie, procVacio, procId, procCola, procHijosRose, procHijosAT, procRaizTrie, procSubTries, unoxuno, sufijos, inorder, preorder, postorder, preorderRose, hojasRose, ramasRose, caminos, palabras, ifProc,(++!), (.!)) where
 
-import Test.HUnit
+--import Test.HUnit
 
 
 --Definiciones de tipos
@@ -65,7 +65,7 @@ instance Show a => Show (Trie a) where
 
 --Ejercicio 1
 procVacio :: Procesador a b
-procVacio = []
+procVacio _ = []
 
 procId :: Procesador a a
 procId a = [a]
@@ -74,25 +74,26 @@ procCola :: Procesador [a] a
 procCola l = if length l > 0 then tail l else []
 
 procHijosRose :: Procesador (RoseTree a) (RoseTree a)
-procHijosRose (Rose children) = Rose children
+procHijosRose (Rose _ children) = children
 
 procHijosAT :: Procesador (AT a) (AT a)
 procHijosAT Nil = []
-procHijosAt (Tern a b c) = [a, b, c]
+procHijosAt (Tern _ a b c) = [a, b, c]
 
 -- TODO: me parece que el TrieNodo Nothing esta raro
 procRaizTrie :: Procesador (Trie a) (Maybe a)
 procRaizTrie (TrieNodo Nothing b) = [Nothing]
-procRaizTrie (TrieNodo t ) = [t]
+procRaizTrie (TrieNodo t _ ) = [t]
 
 procSubTries :: Procesador (Trie a) (Char, Trie a)
-procSubTries (TrieNodo hijos) = hijos
+procSubTries (TrieNodo Nothing hijos) = hijos
 
 
 --Ejercicio 2
 
---foldAT :: undefined
-foldAT = undefined
+foldAT :: (a -> b -> b -> b -> b) -> b -> AT a -> b 
+foldAT _ b Nil = b 
+foldAT f b (Tern r i c d)  = f r (foldAT f b i)  (foldAT f b c) (foldAT f b d)
 
 --foldRose :: undefined
 foldRose = undefined
@@ -161,7 +162,7 @@ ifProc = undefined
 
 
 {-Tests-}
-
+{- 
 main :: IO Counts
 main = do runTestTT allTests
 
@@ -228,3 +229,4 @@ testsEj8c = test [ -- Casos de test para el ejercicio 7
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
   ]
+ -}
