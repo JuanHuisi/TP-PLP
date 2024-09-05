@@ -71,7 +71,7 @@ procId :: Procesador a a
 procId a = [a]
 
 procCola :: Procesador [a] a
-procCola l = if length l > 0 then tail l else [
+procCola l = if length l > 0 then tail l else []
 
 procHijosRose :: Procesador (RoseTree a) (RoseTree a)
 procHijosRose (Rose children) = Rose children
