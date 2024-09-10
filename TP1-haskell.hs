@@ -129,7 +129,7 @@ preorderRose :: Procesador (RoseTree a) a
 preorderRose = foldRose(\r _ h -> r : concat h)
 
 hojasRose :: Procesador (RoseTree a) a
-hojasRose = foldRose(\r x h -> if length x == 0 then r : concat h else concat h )
+hojasRose = foldRose(\r x h -> if length x == 0 then [r] else concat h )
 
 ramasRose :: Procesador (RoseTree a) [a]
 ramasRose = undefined
