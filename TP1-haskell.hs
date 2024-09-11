@@ -132,9 +132,7 @@ hojasRose :: Procesador (RoseTree a) a
 hojasRose = foldRose(\r x h -> if length x == 0 then [r] else concat h )
 
 ramasRose :: Procesador (RoseTree a) [a]
-ramasRose = undefined
-
-
+ramasRose = foldRose (\r _ h -> if null h then [[r]] else concatMap (map (r:)) h);
 --Ejercicio 6
 
 --caminos :: undefined
