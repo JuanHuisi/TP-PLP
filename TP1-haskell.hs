@@ -161,7 +161,8 @@ ifProc f p1 p2 = \v -> if f v then p1 v else p2 v
 
 -- 8.c)
 (.!) :: Procesador b c -> Procesador a b -> Procesador a c
-(.!) = undefined
+(.!) p1 p2 = \x -> concatMap p1 (p2 x)
+
 
 --Ejercicio 9
 -- Se recomienda poner la demostración en un documento aparte, por claridad y prolijidad, y, preferentemente, en algún formato de Markup o Latex, de forma de que su lectura no sea complicada.
