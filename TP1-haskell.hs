@@ -20,9 +20,9 @@ data RoseTree a = Rose a [RoseTree a] deriving Eq
 
 -- Tries
 data Trie a = TrieNodo (Maybe a) [(Char, Trie a)] deriving Eq
--- E.g., t = TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])]
--- es el Trie Bool de que tiene True en la raíz, tres hijos (a, b, y c), y, a su vez, b tiene como hijo a d.
+{- t = TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])] -}
 
+-- es el Trie Bool de que tiene True en la raíz, tres hijos (a, b, y c), y, a su vez, b tiene como hijo a d.
 
 -- Definiciones de Show
 
@@ -99,9 +99,8 @@ foldRose :: (a -> [RoseTree a] -> [b] -> b) -> RoseTree a -> b
 foldRose fRose (Rose n hijos) = fRose n hijos (map (foldRose fRose) hijos)
 
 -- data Trie a = TrieNodo (Maybe a) [(Char, Trie a)] deriving Eq
---foldTrie :: (Maybe a -> [(Char, b)] -> [b]) -> Trie a -> b
-foldTrie = undefined
-
+foldTrie :: (Maybe a -> ([(Char, b)] -> b)) -> Trie a -> b
+foldTrie fTrie (TrieNodo v h) = fTrie v (map(\(b, subtrie) -> (b, foldTrie fTrie subtrie)) h)
 
 
 --Ejercicio 3
@@ -133,16 +132,17 @@ hojasRose = foldRose(\r x h -> if length x == 0 then [r] else concat h )
 
 ramasRose :: Procesador (RoseTree a) [a]
 ramasRose = foldRose (\r _ h -> if null h then [[r]] else concatMap (map (r:)) h);
+
 --Ejercicio 6
-
---caminos :: undefined
-caminos = undefined
-
+caminos :: Trie a -> [[Char]]
+caminos =  foldTrie(\v lst -> [""] ++ concatMap (\(c, sublist) -> map (c:) sublist) lst)
 
 --Ejercicio 7
-
-palabras :: undefined
-palabras = undefined
+palabras :: Trie a -> [[Char]]
+palabras = foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst ++
+  case v of
+    Just _  -> [""]
+    Nothing -> []))
 
 
 --Ejercicio 8
