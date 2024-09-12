@@ -146,9 +146,15 @@ palabras = foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst
 
 
 --Ejercicio 8
--- 8.a)
+-- 8.a) Procesador (RoseTree a) (RoseTree a)
+{-
+Rdo: Las funciones de los procesadores necesitan si o si que se le mande un input.
+Entonces, necesito de alguna forma ese input con f. Si eso evalua en true, entonces aplico la funcion al input correspondiente, caso contrario, aplico la otra funcion al input.
+Ej.: ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] esperaria ["a", "b"]
+-}
 ifProc :: (a->Bool) -> Procesador a b -> Procesador a b -> Procesador a b
-ifProc = undefined
+ifProc f p1 p2 = \v -> if f v then p1 v else p2 v
+  
 
 -- 8.b)
 (++!) :: Procesador a b -> Procesador a b -> Procesador a b
