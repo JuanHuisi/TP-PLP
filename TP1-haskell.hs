@@ -154,11 +154,10 @@ Ej.: ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] esperaria ["a", "b"]
 -}
 ifProc :: (a->Bool) -> Procesador a b -> Procesador a b -> Procesador a b
 ifProc f p1 p2 = \v -> if f v then p1 v else p2 v
-  
 
 -- 8.b)
 (++!) :: Procesador a b -> Procesador a b -> Procesador a b
-(++!) = undefined
+(++!) p1 p2 = \v -> p1 v ++ p2 v
 
 -- 8.c)
 (.!) :: Procesador b c -> Procesador a b -> Procesador a c
