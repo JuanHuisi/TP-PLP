@@ -74,16 +74,26 @@ Recordemos que para poder hacer inducción sobre listas necesitamos predicar ace
             \item P(c): elem x (preorder c) = elem x (postorder c)
             \item P(d): elem x (preorder d) = elem x (postorder d)
         \end{itemize}
-        \item TI: $P(Tern \ r \ i \ c \ d)$
+        \item TI: $P(Tern \ r \ i \ c \ d)$ es decir
+        \begin{itemize}
+        \item elem x (preorder $(Tern \ r \ i \ c \ d)$) = elem x (postorder $(Tern \ r \ i \ c \ d)$)
+        \end{itemize}
     \end{itemize}
 \end{itemize}
 Por lo tanto \\ 
 elem x (preorder (Tern r i c d)) \\ 
 $\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] (Tern r i c d)) \\ 
-$\streq{F1}$ elem x (f r (foldAT f [] i) (foldAT f [] c) (foldAT f [] d)) \\
-
-Nota: f = $\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)
-
+$\streq{F1}$ elem x (r : (foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] i ++ foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] c ++ foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] d)) \\ 
+$\streq{PR0}$ elem x (r : (preorder i) ++ (preorder c) ++ (preorder d)) \\
+$\streq{E1}$ (x==r) $\|$ elem x ((preorder i) ++ (preorder c) ++ (preorder d)) \\
+¿Alguna propiedad concatenacion? \\
+= (x==r) $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d)
+A simple vista, en este momento podrìamos aplicar la HI. Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos
+\begin{itemize}
+\item A: (x==r) = True 
+\item B: (x==r) = False
+\end{itemize}
+Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) -> Creo que acá ya sería una vuelta atrás y llegaríamos. Pero tengo dudas sobre el momento de la concatenación
 
 
 
