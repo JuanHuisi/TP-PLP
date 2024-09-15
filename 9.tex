@@ -14,11 +14,9 @@
 \maketitle
 
 \section{Ejercicio 9}
-De acuerdo a las definiciones de las funciones para arboles ternarios de mas arriba, se pide
-demostrar lo siguiente:\\
-$\forall$ t :: AT a . $\forall$ x :: a . ( elem x (preorder t) = elem x (postorder t) ) \\
+De acuerdo a las definiciones de las funciones para arboles ternarios (AT a) se pide demostrar: $(\forall$t::AT a)($\forall$x::a)(elem x (preorder t) = elem x (postorder t))  \\
 
-Preorder y Postorder son dos maneras diferentes de recorrer un árbol. En este caso en puntual, recorren un árbol ternario.  \\
+Preorder y Postorder son dos maneras diferentes de recorrer un árbol; En este caso en puntual, recorren un árbol ternario.  \\
 
 La lista resultante de ordenar el árbol ternario que devuelve preorder t y postorder t son diferentes, pero lo que ambos tienen en común es que contienen los mismos elementos, es decir, $(\forall x::a) (x \in listaResPreOrder \iff x \in listaResPostOrder)$ \\
 Tenemos un caso que podemos mencionar, donde en el ejercicio 4 del TP: elem n (preorder at) = elem n (postorder at) es válido $\forall n::a$ \\
