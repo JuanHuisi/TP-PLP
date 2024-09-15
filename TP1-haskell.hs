@@ -120,7 +120,7 @@ inorder :: AT a -> [a]
 inorder = foldAT(\r i c d -> (i ++ c ++ [r] ++ d)) []
 
 postorder :: AT a -> [a]
-postorder = foldAT(\r i c d -> reverse (flip (:) (d ++ c ++ i) r)) []
+postorder = foldAT(\r i c d -> reverse (r : (d ++ c ++ i))) []
  
 --Ejercicio 5
 
