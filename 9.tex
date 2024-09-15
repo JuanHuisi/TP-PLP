@@ -66,7 +66,7 @@ Por lo tanto, el caso base es verdadero. \\
 Recordemos que para poder hacer inducción sobre listas necesitamos predicar acerca de $(\forall xs::[a])(\forall x ::a) (P(xs) \implies P(x:xs))$. En árboles, la inducción lo hacemos sobre cada constructor recursivo, en este caso serían 3. \\
 \textbf{Paso Inductivo}: 
 \begin{itemize}
-    \item $(\forall i, c, d:: AT \ a)(\forall r::a)(P(i) \land P(c) \land P(d) \implies P(Tern \ a \ i \ c \ d))$
+    \item $(\forall i, c, d:: AT \ a)(\forall r::a)(P(i) \land P(c) \land P(d) \implies P(Tern \ r \ i \ c \ d))$
     \begin{itemize}
         \item HI: $P(i) \land P(c) \land P(d)$ donde: 
         \begin{itemize}
@@ -74,9 +74,16 @@ Recordemos que para poder hacer inducción sobre listas necesitamos predicar ace
             \item P(c): elem x (preorder c) = elem x (postorder c)
             \item P(d): elem x (preorder d) = elem x (postorder d)
         \end{itemize}
-        \item TI: $P(Tern \ a \ i \ c \ d)$
+        \item TI: $P(Tern \ r \ i \ c \ d)$
     \end{itemize}
 \end{itemize}
+Por lo tanto \\ 
+elem x (preorder (Tern r i c d)) \\ 
+$\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] (Tern r i c d)) \\ 
+$\streq{F1}$ elem x (f r (foldAT f [] i) (foldAT f [] c) (foldAT f [] d)) \\
+
+Nota: f = $\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)
+
 
 
 
