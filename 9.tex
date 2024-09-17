@@ -28,6 +28,10 @@ Recordemos la definición del tipo AT y cuáles son los constructores del tipo c
 Luego, recordemos qué ecuaciones representan a las operaciones de elem, preorder y postorder. 
 
 \begin{lstlisting}
+foldr :: (a -> b -> b) -> b -> [a] -> b
+{FO0} foldr f z [] = z
+{FO1} foldr f z (x:xs) = f x (foldr f z xs)
+
 elem :: Eq a => a -> [a] -> Bool
 {E0} elem e [] = False
 {E1} elem e (x:xs) = (e==x) || elem e xs
@@ -57,7 +61,7 @@ Resolvamos ambos lados por separado y deberíamos llegar a una equivalencia.
 \begin{itemize}
     \item elem x (preorder Nil) $\streq{PR0}$ elem x (foldAT(\r i c d $\rightarrow$ r : (i ++ c ++ d)) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
     
-    \item elem x (postorderNil) $\streq{PS0}$ elem x (foldAT(\r i c d -> reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] = $\streq{E0}$ False
+    \item elem x (postorderNil) $\streq{PS0}$ elem x (foldAT(\r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] = $\streq{E0}$ False
 \end{itemize}
 
 Por lo tanto, el caso base es verdadero. \\
@@ -84,17 +88,38 @@ $\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)
 $\streq{F1}$ elem x (r : (foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] i ++ foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] c ++ foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] d)) \\ 
 $\streq{PR0}$ elem x (r : (preorder i) ++ (preorder c) ++ (preorder d)) \\
 $\streq{E1}$ (x==r) $\|$ elem x ((preorder i) ++ (preorder c) ++ (preorder d)) \\
-¿Alguna propiedad concatenacion? \\
-= (x==r) $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d)
+Aplicamos el Lema 1 \\
+= (x==r) $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) \\
 Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 \begin{itemize}
 \item A: (x==r) = True 
 \item B: (x==r) = False
 \end{itemize}
-Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) $\rightarrow$ Creo que acá ya sería una vuelta atrás y llegaríamos. Pero tengo dudas sobre el momento de la concatenación \\
-Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d)
+Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\rightarrow$, esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\     
+Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) $\streq{Lema 1}$ elem x ((postorder(i)) ++ (postorder c) ++ (postorder d) \\
 
-
+\textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
+$(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys$ \\
+P(xs) = $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys$ \\
+\textbf{Caso Base}: P([])
+\begin{itemize}
+    \item elem e ([] ++ ys) = elem e (foldr(:) ys []) $\streq{F0}$ elem e ys
+    \item elem e ([]) $\|$ elem e (ys) $\streq{E0}$ False $\|$ elem e ys = elem e ys
+\end{itemize}
+Por lo tanto, el caso base es verdadero. \\
+\textbf{Paso Inductivo}: 
+\begin{itemize}
+    \item HI: P(xs): $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys$
+    \item TI: P(x:xs): $(\forall ys :: [a])(\forall e::a)(elem \ e \ ((x:xs)++ys) \ = elem \ e \ (x:xs) \ \| \ elem \ e \ ys$
+\end{itemize}
+elem e ((x:xs) ++ ys) $\streq{++}$ elem e (foldr (:) ys (x:xs)) $\streq{FO1}$ elem e ((:) x (foldr(:) ys xs) $\streq{E1}$ (e == x $\|$ elem e (foldr(:) ys xs) \\
+Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
+\begin{itemize}
+    \item LE1) $e==x = True$ = True $\|$ elem e xs $\|$ elem e ys $=$ True
+    \item LE2) $e==x = False$ = False $\|$ elem e xs $\|$ elem e ys $=$ elem e xs $\|$ elem e ys 
+\end{itemize}
+El caso LE1 es trivial. El caso LE2 podemos aplicar la HI \\
+elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs ++ ys)
 
 
 \end{document}
