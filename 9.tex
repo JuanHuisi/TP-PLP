@@ -59,9 +59,9 @@ Probemos el caso base, es decir, el constructor del tipo AT a no recursivo: este
 Resolvamos ambos lados por separado y deberíamos llegar a una equivalencia. 
 
 \begin{itemize}
-    \item elem x (preorder Nil) $\streq{PR0}$ elem x (foldAT(\r i c d $\rightarrow$ r : (i ++ c ++ d)) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
+    \item elem x (preorder Nil) $\streq{PR0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ r : (i ++ c ++ d)) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
     
-    \item elem x (postorderNil) $\streq{PS0}$ elem x (foldAT(\r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] = $\streq{E0}$ False
+    \item elem x (postorder Nil) $\streq{PS0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] = $\streq{E0}$ False
 \end{itemize}
 
 Por lo tanto, el caso base es verdadero. \\
