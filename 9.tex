@@ -60,11 +60,10 @@ Resolvamos ambos lados por separado y deberíamos llegar a una equivalencia.
 
 \begin{itemize}
     \item elem x (preorder Nil) $\streq{PR0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ r : (i ++ c ++ d)) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
-    
-    \item elem x (postorder Nil) $\streq{PS0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] = $\streq{E0}$ False
+    \item elem x (postorder Nil) $\streq{PS0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
 \end{itemize}
 
-Por lo tanto, el caso base es verdadero. \\
+Como el lado iszquierdo y el derecho de la expresión son equivalentes, el caso base es verdadero. \\
 Recordemos que para poder hacer inducción sobre listas necesitamos predicar acerca de $(\forall xs::[a])(\forall x ::a) (P(xs) \implies P(x:xs))$. En árboles, la inducción lo hacemos sobre cada constructor recursivo, en este caso serían 3. \\
 \textbf{Paso Inductivo}: 
 \begin{itemize}
