@@ -1,6 +1,6 @@
 module Proceso (Procesador, AT(Nil,Tern), RoseTree(Rose), Trie(TrieNodo), foldAT, foldRose, foldTrie, procVacio, procId, procCola, procHijosRose, procHijosAT, procRaizTrie, procSubTries, unoxuno, sufijos, inorder, preorder, postorder, preorderRose, hojasRose, ramasRose, caminos, palabras, ifProc,(++!), (.!)) where
 
---import Test.HUnit
+import Test.HUnit
 
 
 --Definiciones de tipos
@@ -168,33 +168,68 @@ ifProc f p1 p2 = \v -> if f v then p1 v else p2 v
 -- Se recomienda poner la demostración en un documento aparte, por claridad y prolijidad, y, preferentemente, en algún formato de Markup o Latex, de forma de que su lectura no sea complicada.
 
 
-{-Tests-}
-{- 
+--Tests
+ 
 main :: IO Counts
 main = do runTestTT allTests
 
 allTests = test [ -- Reemplazar los tests de prueba por tests propios
-  "ejercicio1" ~: testsEj1,
-  "ejercicio2" ~: testsEj2,
-  "ejercicio3" ~: testsEj3,
-  "ejercicio4" ~: testsEj4,
-  "ejercicio5" ~: testsEj5,
-  "ejercicio6" ~: testsEj6,
-  "ejercicio7" ~: testsEj7,
-  "ejercicio8a" ~: testsEj8a,
-  "ejercicio8b" ~: testsEj8b,
-  "ejercicio8c" ~: testsEj8c
+  "ejercicio1" ~: testsEj1
+  --"ejercicio2" ~: testsEj2,
+  --"ejercicio3" ~: testsEj3,
+  --"ejercicio4" ~: testsEj4,
+  --"ejercicio5" ~: testsEj5,
+  --"ejercicio6" ~: testsEj6,
+  --"ejercicio7" ~: testsEj7,
+  --"ejercicio8a" ~: testsEj8a,
+  --"ejercicio8b" ~: testsEj8b,
+  --"ejercicio8c" ~: testsEj8c
   ]
 
-testsEj1 = test [ -- Casos de test para el ejercicio 1
-  0             -- Caso de test 1 - expresión a testear
-    ~=? 0                                                               -- Caso de test 1 - resultado esperado
-  ,
-  1     -- Caso de test 2 - expresión a testear
-    ~=? 1                                                               -- Caso de test 2 - resultado esperado
+testsEj1 = test [
+    procVacio  (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? ([] :: [()]),
+    procVacio (Tern Nil) ~=? ([] :: [()]),
+    procId (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [(Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil))],
+    procId (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [(Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []])]
   ]
 
-testsEj2 = test [ -- Casos de test para el ejercicio 2
+{- testsEj2 = test [ -- Casos de test para el ejercicio 2
+  Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []] 
+  TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])]
+  (0,0)       -- Caso de test 1 - expresión a testear
+    ~=? (0,0)                   -- Caso de test 1 - resultado esperado
+  ]
+
+testsEj3 = test [ -- Casos de test para el ejercicio 3
+  'a'      -- Caso de test 1 - expresión a testear
+    ~=? 'a'            -- Caso de test 1 - resultado esperado
+  ]
+
+testsEj4 = test [ -- Casos de test para el ejercicio 4
+  ""       -- Caso de test 1 - expresión a testear
+    ~=? ""                             -- Caso de test 1 - resultado esperado
+  ]
+
+testsEj5 = test [ -- Casos de test para el ejercicio 5
+  0       -- Caso de test 1 - expresión a testear
+    ~=? 0                                       -- Caso de test 1 - resultado esperado
+  ]
+
+testsEj6 = test [ -- Casos de test para el ejercicio 6
+  False       -- Caso de test 1 - expresión a testear
+    ~=? False                                            -- Caso de test 1 - resultado esperado
+  ]
+
+testsEj7 = test [ -- Casos de test para el ejercicio 7
+  True         -- Caso de test 1 - expresión a testear
+    ~=? True                                          -- Caso de test 1 - resultado esperado
+  ]
+
+testsEj8a = test [ -- Casos de test para el ejercicio 7
+  True         -- Caso de test 1 - expresión a testear
+    ~=? True                                          -- Caso de test 1 - resultado esperado
+  ]
+testsEj8b = test [ -- Casos detestsEj2 = test [ -- Casos de test para el ejercicio 2
   (0,0)       -- Caso de test 1 - expresión a testear
     ~=? (0,0)                   -- Caso de test 1 - resultado esperado
   ]
@@ -229,6 +264,14 @@ testsEj8a = test [ -- Casos de test para el ejercicio 7
     ~=? True                                          -- Caso de test 1 - resultado esperado
   ]
 testsEj8b = test [ -- Casos de test para el ejercicio 7
+  True         -- Caso de test 1 - expresión a testear
+    ~=? True                                          -- Caso de test 1 - resultado esperado
+  ]
+testsEj8c = test [ -- Casos de test para el ejercicio 7
+  True         -- Caso de test 1 - expresión a testear
+    ~=? True                                          -- Caso de test 1 - resultado esperado
+  ]
+ test para el ejercicio 7[
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
   ]
