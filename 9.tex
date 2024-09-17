@@ -96,7 +96,7 @@ Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 \end{itemize}
 Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) = True \\
 Esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\  
-   
+
 Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) $\streq{Lema 1}$ elem x ((postorder(i)) ++ (postorder c) ++ (postorder d))\\
 
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
@@ -117,11 +117,16 @@ elem e ((x:xs) ++ ys) $\streq{++}$ elem e (foldr (:) ys (x:xs)) $\streq{FO1}$ el
 Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
 \begin{itemize}
     \item LE1) $e==x = True$ = True $\|$ elem e xs $\|$ elem e ys $=$ True
-    \item LE2) $e==x = False$ = False $\|$ elem e xs $\|$ elem e ys $=$ elem e xs $\|$ elem e ys 
+    \item LE2) $e==x = False$ = False $\|$ elem e xs $\|$ elem e ys $=$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs ++ ys)
 \end{itemize}
-El caso LE1 es trivial. El caso LE2 podemos aplicar la HI \\
-elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs ++ ys)
-
+Veamos ahora por el otro lado \\
+elem e (x:xs) $\|$ elem ys $\streq{E1}$ (e == x $\|$ elem e xs $\|$ elem e ys) \\
+Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
+\begin{itemize}
+    \item LE1) $e==x = True$ $\|$ elem e xs $\|$ elem e ys = True 
+    \item LE2) $e==x = False$ $\|$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs++ys)
+\end{itemize}
+Luego, queda probado el Lema. 
 
 \end{document}
 
