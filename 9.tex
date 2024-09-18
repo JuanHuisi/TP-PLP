@@ -97,10 +97,11 @@ Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) = True \\
 Esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\  
 
-Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) $\streq{Lema 1}$ elem x ((postorder(i)) ++ (postorder c) ++ (postorder d))\\
-
+Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) \\ 
+$\streq{Lema 1}$ elem x ((postorder(i)) ++ (postorder c) ++ (postorder d))
+$\streq{Conmutatividad ++}$ elem x 
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
-$(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys$ \\
+$(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
 P(xs) = $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
 \textbf{Caso Base}: P([])
 \begin{itemize}

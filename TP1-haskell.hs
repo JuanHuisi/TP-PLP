@@ -78,15 +78,14 @@ procHijosRose (Rose _ children) = children
 
 procHijosAT :: Procesador (AT a) (AT a)
 procHijosAT Nil = []
-procHijosAt (Tern _ a b c) = [a, b, c]
+procHijosAT (Tern _ a b c) = [a, b, c]
 
--- TODO: me parece que el TrieNodo Nothing esta raro
 procRaizTrie :: Procesador (Trie a) (Maybe a)
 procRaizTrie (TrieNodo Nothing b) = [Nothing]
 procRaizTrie (TrieNodo t _ ) = [t]
 
 procSubTries :: Procesador (Trie a) (Char, Trie a)
-procSubTries (TrieNodo Nothing hijos) = hijos
+procSubTries (TrieNodo _ hijos) = hijos
 
 
 --Ejercicio 2
@@ -190,9 +189,25 @@ testsEj1 = test [
     procVacio  (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? ([] :: [()]),
     procVacio (Tern Nil) ~=? ([] :: [()]),
     procId (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [(Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil))],
-    procId (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [(Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []])]
+    procId (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [(Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []])],
+    procCola [1, 2, 3] ~=? [2, 3],
+    procCola [1] ~=? [],
+    procHijosRose (Rose 1 [Rose 2 [], Rose 5 []]) ~=? [Rose 2 [], Rose 5 []],
+    procHijosRose (Rose 1 [Rose 2 [Rose 10 []], Rose 8 []]) ~=? [Rose 2 [Rose 10 []], Rose 8 []],
+    procHijosAT (Tern 1 Nil Nil Nil) ~=? [Nil, Nil, Nil],
+    procHijosAT (Tern 1 (Tern 2 Nil Nil Nil) Nil Nil)  ~=? [(Tern 2 Nil Nil Nil), Nil, Nil],
+    procHijosAT (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 3 Nil (Tern 4 Nil Nil Nil) Nil))  ~=? [(Tern 2 Nil Nil Nil), Nil, (Tern 3 Nil (Tern 4 Nil Nil Nil) Nil )],
+    procRaizTrie (TrieNodo (Just True) []) ~=? [(Just True)],
+    procSubTries (TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [])]) ~=? [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [])],
+    procSubTries (TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [])])]) ~=? [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [])])]
   ]
+{- procRaizTrie :: Procesador (Trie a) (Maybe a)
+procRaizTrie (TrieNodo Nothing b) = [Nothing]
+procRaizTrie (TrieNodo t _ ) = [t] -}
+{-
+TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])]
 
+-}
 {- testsEj2 = test [ -- Casos de test para el ejercicio 2
   Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []] 
   TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])]
