@@ -177,12 +177,12 @@ allTests = test [ -- Reemplazar los tests de prueba por tests propios
   "ejercicio2" ~: testsEj2,
   --"ejercicio3" ~: testsEj3,
   --"ejercicio4" ~: testsEj4,
-  "ejercicio5" ~: testsEj5
+  "ejercicio5" ~: testsEj5,
   --"ejercicio6" ~: testsEj6,
   --"ejercicio7" ~: testsEj7,
   --"ejercicio8a" ~: testsEj8a,
   --"ejercicio8b" ~: testsEj8b,
-  --"ejercicio8c" ~: testsEj8c
+  "ejercicio8c" ~: testsEj8c
   ]
 
 testsEj1 = test [
@@ -274,15 +274,17 @@ testsEj7 = test [ -- Casos de test para el ejercicio 7
 testsEj8a = test [ -- Casos de test para el ejercicio 7
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]
+  ]-}
 testsEj8b = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
+  
+  (++!) preorder inorder (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [1,2,3,4,2,3,1,4]
+                                           -- Caso de test 1 - resultado esperado
   ]
 testsEj8c = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
+  
+    (.!) (\z -> [0..z]) (map (+1)) [1,3] ~=? [0,1,2,0,1,2,3,4]
   ]
+  {-
  test para el ejercicio 7[
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
