@@ -180,8 +180,8 @@ allTests = test [ -- Reemplazar los tests de prueba por tests propios
   "ejercicio5" ~: testsEj5,
   --"ejercicio6" ~: testsEj6,
   --"ejercicio7" ~: testsEj7,
-  --"ejercicio8a" ~: testsEj8a,
-  --"ejercicio8b" ~: testsEj8b,
+  "ejercicio8a" ~: testsEj8a,
+  "ejercicio8b" ~: testsEj8b,
   "ejercicio8c" ~: testsEj8c
   ]
 
@@ -270,11 +270,11 @@ testsEj7 = test [ -- Casos de test para el ejercicio 7
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
   ]
-
+-}
 testsEj8a = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]-}
+  
+  ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] ~=? ["a", "b"]
+  ]
 testsEj8b = test [ -- Casos de test para el ejercicio 7
   
   (++!) preorder inorder (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [1,2,3,4,2,3,1,4]
