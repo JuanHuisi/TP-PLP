@@ -117,14 +117,14 @@ elem e ((x:xs) ++ ys) $\streq{++}$ elem e (foldr (:) ys (x:xs)) $\streq{FO1}$ el
 Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
 \begin{itemize}
     \item LE1) $e==x = True$ = True $\|$ elem e xs $\|$ elem e ys $=$ True
-    \item LE2) $e==x = False$ = False $\|$ elem e xs $\|$ elem e ys $=$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs ++ ys)
+    \item LE2) $e==x = False$ = False $\|$ elem e xs $\|$ elem e ys $=$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs ++ ys) = True 
 \end{itemize}
 Veamos ahora por el otro lado \\
 elem e (x:xs) $\|$ elem ys $\streq{E1}$ (e == x $\|$ elem e xs $\|$ elem e ys) \\
 Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
 \begin{itemize}
     \item LE1) $e==x = True$ $\|$ elem e xs $\|$ elem e ys = True 
-    \item LE2) $e==x = False$ $\|$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs++ys)
+    \item LE2) $e==x = False$ $\|$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs++ys) = True 
 \end{itemize}
 Luego, queda probado el Lema. 
 
