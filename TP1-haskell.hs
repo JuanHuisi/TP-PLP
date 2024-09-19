@@ -1,6 +1,7 @@
 module Proceso (Procesador, AT(Nil,Tern), RoseTree(Rose), Trie(TrieNodo), foldAT, foldRose, foldTrie, procVacio, procId, procCola, procHijosRose, procHijosAT, procRaizTrie, procSubTries, unoxuno, sufijos, inorder, preorder, postorder, preorderRose, hojasRose, ramasRose, caminos, palabras, ifProc,(++!), (.!)) where
-
+import Data.List (nub)
 import Test.HUnit
+
 
 
 --Definiciones de tipos
@@ -138,7 +139,7 @@ caminos =  foldTrie(\v lst -> [""] ++ concatMap (\(c, sublist) -> map (c:) subli
 
 --Ejercicio 7
 palabras :: Trie a -> [[Char]]
-palabras = foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst ++
+palabras = nub . foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst ++
   case v of
     Just _  -> [""]
     Nothing -> []))
