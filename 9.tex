@@ -43,10 +43,10 @@ foldAT :: (a -> b -> b -> b -> b) -> b -> AT a -> b
 f r (foldAT f b i)  (foldAT f b c) (foldAT f b d)
 
 preorder :: AT a -> [a]
-{PR0} preorder = foldAT(\r i c d -> r : (i ++ c ++ d)) []
+{PR0} preorder = foldAT(\r i c d -> [r] ++ i ++ c ++ d) []
 
 postorder :: AT a -> [a]
-{PS0} postorder = foldAT(\r i c d -> reverse (r : (d ++ c ++ i))) []
+{PS0} postorder = foldAT(\r i c d ->  [r] ++ d ++ c ++ i) []
 \end{lstlisting}
 
 Por inducción estructural en t tenemos: 
@@ -59,8 +59,8 @@ Probemos el caso base, es decir, el constructor del tipo AT a no recursivo: este
 Resolvamos ambos lados por separado y deberíamos llegar a una equivalencia. 
 
 \begin{itemize}
-    \item elem x (preorder Nil) $\streq{PR0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ r : (i ++ c ++ d)) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
-    \item elem x (postorder Nil) $\streq{PS0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
+    \item elem x (preorder Nil) $\streq{PR0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
+    \item elem x (postorder Nil) $\streq{PS0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
 \end{itemize}
 
 Como el lado izquierdo y el derecho de la expresión son equivalentes, el caso base es verdadero. \\
@@ -81,11 +81,11 @@ Recordemos que para poder hacer inducción sobre listas necesitamos predicar ace
         \end{itemize}
     \end{itemize}
 \end{itemize}
-Por lo tanto \\ 
+Por lo tanto,
 elem x (preorder (Tern r i c d)) \\ 
-$\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] (Tern r i c d)) \\ 
-$\streq{F1}$ elem x (r : (foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] i ++ foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] c ++ foldAT ($\backslash$r i c d $\rightarrow$ r : (i ++ c ++ d)) [] d)) \\ 
-$\streq{PR0}$ elem x (r : (preorder i) ++ (preorder c) ++ (preorder d)) \\
+$\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] (Tern r i c d)) \\ 
+$\streq{F1}$ elem x ([r] ++ (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ )) [] i ++ foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] c ++ foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] d) \\ 
+$\streq{PR0}$ elem x ([r] ++ (preorder i) ++ (preorder c) ++ (preorder d)) \\
 $\streq{E1}$ (x==r) $\|$ elem x ((preorder i) ++ (preorder c) ++ (preorder d)) \\
 Aplicamos el Lema 1 \\
 = (x==r) $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) \\
@@ -94,11 +94,13 @@ Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 \item A: (x==r) = True 
 \item B: (x==r) = False
 \end{itemize}
-Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) = True \\
+\textbf{Caso A}: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) = True \\
 Esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\  
-Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) \\ 
-$\streq{Lema 1}$ elem x ((postorder(i)) ++ (postorder c) ++ (postorder d))
-$\streq{Conmutatividad ++}$ elem x \\
+\textbf{Caso B}: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) \\ 
+$\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c) $\|$ (postorder d) \\
+
+
+\newpage
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
 $(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
 P(xs) = $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
@@ -120,7 +122,7 @@ Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $
     \item LE2) $e==x = False$ = False $\|$ elem e xs $\|$ elem e ys $=$ elem e xs $\|$ elem e ys $\streq{HI}$ elem e (xs ++ ys) = True 
 \end{itemize}
 Veamos ahora por el otro lado \\
-elem e (x:xs) $\|$ elem ys $\streq{E1}$ (e == x $\|$ elem e xs $\|$ elem e ys) \\
+elem e (x:xs) $\|$ elem ys $\streq{E1}$ (e == x) $\|$ elem e xs $\|$ elem e ys \\
 Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
 \begin{itemize}
     \item LE1) $e==x = True$ $\|$ elem e xs $\|$ elem e ys = True 

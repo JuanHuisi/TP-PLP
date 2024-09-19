@@ -112,14 +112,14 @@ sufijos = foldr (\c acc -> (c : if null (head acc) then [] else head acc) : acc)
 
 --Ejercicio 4
 preorder :: AT a -> [a]
-preorder = foldAT(\r i c d -> r : (i ++ c ++ d)) []
+preorder = foldAT(\r i c d -> [r] ++ i ++ c ++ d) []
 
 
 inorder :: AT a -> [a]
 inorder = foldAT(\r i c d -> (i ++ c ++ [r] ++ d)) []
 
 postorder :: AT a -> [a]
-postorder = foldAT(\r i c d -> reverse (r : (d ++ c ++ i))) []
+postorder = foldAT(\r i c d ->  [r] ++ d ++ c ++ i) []
  
 --Ejercicio 5
 
