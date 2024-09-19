@@ -174,10 +174,10 @@ main = do runTestTT allTests
 
 allTests = test [ -- Reemplazar los tests de prueba por tests propios
   "ejercicio1" ~: testsEj1,
-  "ejercicio2" ~: testsEj2
+  "ejercicio2" ~: testsEj2,
   --"ejercicio3" ~: testsEj3,
   --"ejercicio4" ~: testsEj4,
-  --"ejercicio5" ~: testsEj5,
+  "ejercicio5" ~: testsEj5
   --"ejercicio6" ~: testsEj6,
   --"ejercicio7" ~: testsEj7,
   --"ejercicio8a" ~: testsEj8a,
@@ -205,7 +205,6 @@ testsEj1 = test [
 testsEj2 = test [
     foldAT (\r i c d -> r : (i ++ c ++ d))  [] (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 4 Nil Nil Nil))  ~=?  [1, 2, 4],
 
-
     foldRose (\r _ res-> r + sum res)  (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? 15
   ]
 
@@ -218,12 +217,17 @@ testsEj4 = test [ -- Casos de test para el ejercicio 4
   ""       -- Caso de test 1 - expresión a testear
     ~=? ""                             -- Caso de test 1 - resultado esperado
   ]
-
+-}
 testsEj5 = test [ -- Casos de test para el ejercicio 5
-  0       -- Caso de test 1 - expresión a testear
-    ~=? 0                                       -- Caso de test 1 - resultado esperado
+  
+  preorderRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [1,2,3,4,5],
+  hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2,3,4,5],
+  hojasRose (Rose 1 []) ~=? [1],
+  ramasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [[1,2],[1,3],[1,4],[1,5]]
+  
+  
   ]
-
+{-
 testsEj6 = test [ -- Casos de test para el ejercicio 6
   False       -- Caso de test 1 - expresión a testear
     ~=? False                                            -- Caso de test 1 - resultado esperado
