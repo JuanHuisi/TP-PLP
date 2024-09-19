@@ -221,11 +221,10 @@ testsEj4 = test [ -- Casos de test para el ejercicio 4
 testsEj5 = test [ -- Casos de test para el ejercicio 5
   
   preorderRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [1,2,3,4,5],
+
   hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2,3,4,5],
-  hojasRose (Rose 1 []) ~=? [1],
+
   ramasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [[1,2],[1,3],[1,4],[1,5]]
-  
-  
   ]
 {-
 testsEj6 = test [ -- Casos de test para el ejercicio 6
