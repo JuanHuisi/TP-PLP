@@ -119,7 +119,7 @@ inorder :: AT a -> [a]
 inorder = foldAT(\r i c d -> (i ++ c ++ [r] ++ d)) []
 
 postorder :: AT a -> [a]
-postorder = foldAT(\r i c d ->  [r] ++ d ++ c ++ i) []
+postorder = foldAT(\r i c d ->  (i ++ c ++ d ++ [r])) []
  
 --Ejercicio 5
 
@@ -143,7 +143,18 @@ palabras = foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst
     Just _  -> [""]
     Nothing -> []))
 
+--Funciones Auxiliares
+{-
+eliminarRepetidos :: [[Char]] -> [[Char]]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs) | (pertenece x xs) = eliminarRepetidos xs
+                         | otherwise = [x] ++ eliminarRepetidos xs
 
+pertenece :: [Char] -> [[Char]] -> Bool
+pertenece x [] = False
+pertenece x (y:ys) | x == y = True
+                   | otherwise = pertenece x ys
+-}
 --Ejercicio 8
 -- 8.a) Procesador (RoseTree a) (RoseTree a)
 {-
@@ -175,11 +186,11 @@ main = do runTestTT allTests
 allTests = test [ -- Reemplazar los tests de prueba por tests propios
   "ejercicio1" ~: testsEj1,
   "ejercicio2" ~: testsEj2,
-  --"ejercicio3" ~: testsEj3,
-  --"ejercicio4" ~: testsEj4,
+  "ejercicio3" ~: testsEj3,
+  "ejercicio4" ~: testsEj4,
   "ejercicio5" ~: testsEj5,
-  --"ejercicio6" ~: testsEj6,
-  --"ejercicio7" ~: testsEj7,
+  "ejercicio6" ~: testsEj6,
+  "ejercicio7" ~: testsEj7,
   "ejercicio8a" ~: testsEj8a,
   "ejercicio8b" ~: testsEj8b,
   "ejercicio8c" ~: testsEj8c
