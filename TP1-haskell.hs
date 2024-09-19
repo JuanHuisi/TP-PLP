@@ -208,16 +208,19 @@ testsEj2 = test [
     foldRose (\r _ res-> r + sum res)  (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? 15
   ]
 
-{- testsEj3 = test [ -- Casos de test para el ejercicio 3
-  'a'      -- Caso de test 1 - expresión a testear
-    ~=? 'a'            -- Caso de test 1 - resultado esperado
+ testsEj3 = test [
+    unoxuno [3,1,4,1,5,9] ~=? [[3],[1],[4],[1],[5],[9]],
+    unoxuno [1] ~=? [[1]],
+    sufijos "Plp" ~=? ["Plp", "lp", "p", ""],
+    sufijos "" ~=? [""]
   ]
 
-testsEj4 = test [ -- Casos de test para el ejercicio 4
-  ""       -- Caso de test 1 - expresión a testear
-    ~=? ""                             -- Caso de test 1 - resultado esperado
+testsEj4 = test [ 
+    preorder (Tern 16 (Tern 1 (Tern 9 Nil Nil Nil) (Tern 7 Nil Nil Nil) (Tern 2 Nil Nil Nil)) (Tern 14 (Tern 0 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 6 Nil Nil Nil)) (Tern 10 (Tern 8 Nil Nil Nil) (Tern 5 Nil Nil Nil) (Tern 4 Nil Nil Nil))) ~=? [16,1,9,7,2,14,0,3,6,10,8,5,4],
+    postorder (Tern 16 (Tern 1 (Tern 9 Nil Nil Nil) (Tern 7 Nil Nil Nil) (Tern 2 Nil Nil Nil)) (Tern 14 (Tern 0 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 6 Nil Nil Nil)) (Tern 10 (Tern 8 Nil Nil Nil) (Tern 5 Nil Nil Nil) (Tern 4 Nil Nil Nil))) ~=? [9,7,2,1,0,3,6,14,8,5,4,10,16],
+    inorder (Tern 16 (Tern 1 (Tern 9 Nil Nil Nil) (Tern 7 Nil Nil Nil) (Tern 2 Nil Nil Nil)) (Tern 14 (Tern 0 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 6 Nil Nil Nil)) (Tern 10 (Tern 8 Nil Nil Nil) (Tern 5 Nil Nil Nil) (Tern 4 Nil Nil Nil))) ~=? [9,7,1,2,0,3,14,6,16,8,5,10,4]
   ]
--}
+
 testsEj5 = test [ -- Casos de test para el ejercicio 5
   
   preorderRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [1,2,3,4,5],
@@ -226,17 +229,19 @@ testsEj5 = test [ -- Casos de test para el ejercicio 5
 
   ramasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [[1,2],[1,3],[1,4],[1,5]]
   ]
+
+testsEj6 = test [ 
+    caminos (TrieNodo Nothing [ ('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]),('c', TrieNodo (Just True) [])]) ~=? ["", "a", "b", "ba", "bad", "c"],
+    caminos (TrieNodo (Just True) []) ~=? [""]
+  ]
+
+testsEj7 = test [ 
+    palabras (TrieNodo Nothing [ ('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]),('c', TrieNodo (Just True) [])]) ~=?  ["a", "ba", "c"],
+    palabras (TrieNodo (Just True) []) ~=? [""],
+    palabras (TrieNodo Nothing []) ~=? [],
+    palabras (TrieNodo Nothing [ ('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]),('b', TrieNodo Nothing [ ('a', TrieNodo (Just True) [])])]) ~=? ["a","ba"]
+  ]
 {-
-testsEj6 = test [ -- Casos de test para el ejercicio 6
-  False       -- Caso de test 1 - expresión a testear
-    ~=? False                                            -- Caso de test 1 - resultado esperado
-  ]
-
-testsEj7 = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]
-
 testsEj8a = test [ -- Casos de test para el ejercicio 7
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
