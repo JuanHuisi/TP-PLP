@@ -81,7 +81,7 @@ Recordemos que para poder hacer inducción sobre listas necesitamos predicar ace
         \end{itemize}
     \end{itemize}
 \end{itemize}
-Por lo tanto,
+\textbf{Lado Izquierdo} \\
 elem x (preorder (Tern r i c d)) \\ 
 $\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] (Tern r i c d)) \\ 
 $\streq{F1}$ elem x ([r] ++ (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ )) [] i ++ foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] c ++ foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] d) \\ 
@@ -98,7 +98,7 @@ Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 Esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\  
 \textbf{Caso B}: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) \\ 
 $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c) $\|$ (postorder d) \\
-
+\textbf{Lado Derecho}
 
 \newpage
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
