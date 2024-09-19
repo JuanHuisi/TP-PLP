@@ -135,21 +135,14 @@ ramasRose = foldRose (\r _ h -> if null h then [[r]] else concatMap (map (r:)) h
 
 --Ejercicio 6
 caminos :: Trie a -> [[Char]]
-caminos =  foldTrie(\v lst -> [""] ++ concatMap (\(c, sublist) -> map (c:) sublist) lst)
+caminos =  foldTrie(\v lst -> [""] ++ concatMap (\(c, subtrie) -> map (c:) subtrie) lst)
 
 --Ejercicio 7
 palabras :: Trie a -> [[Char]]
-palabras = nub . foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst ++
+palabras = nub . foldTrie((\v lst -> concatMap (\(c, subtrie) -> map (c:) subtrie) lst ++
   case v of
     Just _  -> [""]
     Nothing -> []))
-
---Funciones Auxiliares
-eliminarRepetidos :: [[Char]] -> [[Char]]
-eliminarRepetidos [] = []
-eliminarRepetidos (x:xs) | (elem x xs) = eliminarRepetidos xs
-                         | otherwise = [x] ++ eliminarRepetidos xs
-
 
 --Ejercicio 8
 -- 8.a) Procesador (RoseTree a) (RoseTree a)
@@ -211,8 +204,8 @@ testsEj1 = test [
   
 testsEj2 = test [
     foldAT (\r i c d -> r : (i ++ c ++ d))  [] (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 4 Nil Nil Nil))  ~=?  [1, 2, 4],
-
-    foldRose (\r _ res-> r + sum res)  (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? 15
+    foldRose (\r _ res -> r + sum res)  (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? 15,
+    foldTrie (\_ subtrie -> map fst subtrie) (TrieNodo (Just True)[('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing[('a', TrieNodo (Just True) [])])]) ~=? ['a', 'b']
   ]
 
 testsEj3 = test [
