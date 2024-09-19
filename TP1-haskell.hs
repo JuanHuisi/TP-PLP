@@ -173,8 +173,8 @@ main :: IO Counts
 main = do runTestTT allTests
 
 allTests = test [ -- Reemplazar los tests de prueba por tests propios
-  "ejercicio1" ~: testsEj1
-  --"ejercicio2" ~: testsEj2,
+  "ejercicio1" ~: testsEj1,
+  "ejercicio2" ~: testsEj2
   --"ejercicio3" ~: testsEj3,
   --"ejercicio4" ~: testsEj4,
   --"ejercicio5" ~: testsEj5,
@@ -201,21 +201,13 @@ testsEj1 = test [
     procSubTries (TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [])]) ~=? [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [])],
     procSubTries (TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [])])]) ~=? [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [])])]
   ]
-{- procRaizTrie :: Procesador (Trie a) (Maybe a)
-procRaizTrie (TrieNodo Nothing b) = [Nothing]
-procRaizTrie (TrieNodo t _ ) = [t] -}
-{-
-TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])]
-
--}
-{- testsEj2 = test [ -- Casos de test para el ejercicio 2
-  Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []] 
-  TrieNodo (Just True) [('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]), ('c', TrieNodo (Just True) [])]
-  (0,0)       -- Caso de test 1 - expresión a testear
-    ~=? (0,0)                   -- Caso de test 1 - resultado esperado
+  
+testsEj2 = test [
+    foldAT (\r i c d -> r : (i ++ c ++ d))  [] (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 4 Nil Nil Nil))  ~=?  [1, 2, 4],
+    foldRose
   ]
 
-testsEj3 = test [ -- Casos de test para el ejercicio 3
+{- testsEj3 = test [ -- Casos de test para el ejercicio 3
   'a'      -- Caso de test 1 - expresión a testear
     ~=? 'a'            -- Caso de test 1 - resultado esperado
   ]
@@ -294,4 +286,5 @@ testsEj8c = test [ -- Casos de test para el ejercicio 7
   True         -- Caso de test 1 - expresión a testear
     ~=? True                                          -- Caso de test 1 - resultado esperado
   ]
+ 
  -}

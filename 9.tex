@@ -63,7 +63,7 @@ Resolvamos ambos lados por separado y deberíamos llegar a una equivalencia.
     \item elem x (postorder Nil) $\streq{PS0}$ elem x (foldAT($\backslash$ r i c d $\rightarrow$ reverse (r : (d ++ c ++ i))) [] Nil) $\streq{F0}$ elem x [] $\streq{E0}$ False
 \end{itemize}
 
-Como el lado iszquierdo y el derecho de la expresión son equivalentes, el caso base es verdadero. \\
+Como el lado izquierdo y el derecho de la expresión son equivalentes, el caso base es verdadero. \\
 Recordemos que para poder hacer inducción sobre listas necesitamos predicar acerca de $(\forall xs::[a])(\forall x ::a) (P(xs) \implies P(x:xs))$. En árboles, la inducción lo hacemos sobre cada constructor recursivo, en este caso serían 3. \\
 \textbf{Paso Inductivo}: 
 \begin{itemize}
@@ -96,10 +96,9 @@ Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 \end{itemize}
 Caso A: True $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) = True \\
 Esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\  
-
 Caso B: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c)  $\|$ elem x (postorder d) \\ 
 $\streq{Lema 1}$ elem x ((postorder(i)) ++ (postorder c) ++ (postorder d))
-$\streq{Conmutatividad ++}$ elem x 
+$\streq{Conmutatividad ++}$ elem x \\
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
 $(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
 P(xs) = $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
@@ -114,7 +113,7 @@ Por lo tanto, el caso base es verdadero. \\
     \item HI: P(xs): $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys$
     \item TI: P(x:xs): $(\forall ys :: [a])(\forall e::a)(elem \ e \ ((x:xs)++ys) \ = elem \ e \ (x:xs) \ \| \ elem \ e \ ys$
 \end{itemize}
-elem e ((x:xs) ++ ys) $\streq{++}$ elem e (foldr (:) ys (x:xs)) $\streq{FO1}$ elem e ((:) x (foldr(:) ys xs) $\streq{E1}$ (e == x $\|$ elem e (foldr(:) ys xs) \\
+elem e ((x:xs) ++ ys) $\streq{++}$ elem e (foldr (:) ys (x:xs)) $\streq{FO1}$ elem e ((:) x (foldr(:) ys xs) $\streq{E1}$ (e == x $\|$ elem e (foldr(:) ys xs)) \\
 Por el \textbf{principio de extensionalidad de booleanos} tengo dos casos para $e==x$
 \begin{itemize}
     \item LE1) $e==x = True$ = True $\|$ elem e xs $\|$ elem e ys $=$ True
