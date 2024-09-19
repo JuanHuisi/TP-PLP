@@ -252,41 +252,7 @@ testsEj7 = test [
     palabras (TrieNodo Nothing []) ~=? [],
     palabras (TrieNodo Nothing [ ('a', TrieNodo (Just True) []), ('b', TrieNodo Nothing [('a', TrieNodo (Just True) [('d', TrieNodo Nothing [])])]),('b', TrieNodo Nothing [ ('a', TrieNodo (Just True) [])])]) ~=? ["a","ba"]
   ]
-{-
-testsEj8a = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]
-testsEj8b = test [ -- Casos detestsEj2 = test [ -- Casos de test para el ejercicio 2
-  (0,0)       -- Caso de test 1 - expresión a testear
-    ~=? (0,0)                   -- Caso de test 1 - resultado esperado
-  ]
 
-testsEj3 = test [ -- Casos de test para el ejercicio 3
-  'a'      -- Caso de test 1 - expresión a testear
-    ~=? 'a'            -- Caso de test 1 - resultado esperado
-  ]
-
-testsEj4 = test [ -- Casos de test para el ejercicio 4
-  ""       -- Caso de test 1 - expresión a testear
-    ~=? ""                             -- Caso de test 1 - resultado esperado
-  ]
-
-testsEj5 = test [ -- Casos de test para el ejercicio 5
-  0       -- Caso de test 1 - expresión a testear
-    ~=? 0                                       -- Caso de test 1 - resultado esperado
-  ]
-
-testsEj6 = test [ -- Casos de test para el ejercicio 6
-  False       -- Caso de test 1 - expresión a testear
-    ~=? False                                            -- Caso de test 1 - resultado esperado
-  ]
-
-testsEj7 = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]
--}
 testsEj8a = test [ -- Casos de test para el ejercicio 7
   
   ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] ~=? ["a", "b"]
@@ -300,14 +266,3 @@ testsEj8c = test [ -- Casos de test para el ejercicio 7
   
     (.!) (\z -> [0..z]) (map (+1)) [1,3] ~=? [0,1,2,0,1,2,3,4]
   ]
-  {-
- test para el ejercicio 7[
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]
-testsEj8c = test [ -- Casos de test para el ejercicio 7
-  True         -- Caso de test 1 - expresión a testear
-    ~=? True                                          -- Caso de test 1 - resultado esperado
-  ]
- 
- -}
