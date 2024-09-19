@@ -203,7 +203,10 @@ testsEj1 = test [
   ]
   
 testsEj2 = test [
-    foldAT (\r i c d -> r : (i ++ c ++ d))  [] (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 4 Nil Nil Nil))  ~=?  [1, 2, 4]
+    foldAT (\r i c d -> r : (i ++ c ++ d))  [] (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 4 Nil Nil Nil))  ~=?  [1, 2, 4],
+
+
+    foldRose (\r _ res-> r + sum res)  (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? 15
   ]
 
 {- testsEj3 = test [ -- Casos de test para el ejercicio 3
