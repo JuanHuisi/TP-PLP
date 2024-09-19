@@ -144,17 +144,12 @@ palabras = foldTrie((\v lst -> concatMap (\(c, sublist) -> map (c:) sublist) lst
     Nothing -> []))
 
 --Funciones Auxiliares
-{-
 eliminarRepetidos :: [[Char]] -> [[Char]]
 eliminarRepetidos [] = []
-eliminarRepetidos (x:xs) | (pertenece x xs) = eliminarRepetidos xs
+eliminarRepetidos (x:xs) | (elem x xs) = eliminarRepetidos xs
                          | otherwise = [x] ++ eliminarRepetidos xs
 
-pertenece :: [Char] -> [[Char]] -> Bool
-pertenece x [] = False
-pertenece x (y:ys) | x == y = True
-                   | otherwise = pertenece x ys
--}
+
 --Ejercicio 8
 -- 8.a) Procesador (RoseTree a) (RoseTree a)
 {-
@@ -219,7 +214,7 @@ testsEj2 = test [
     foldRose (\r _ res-> r + sum res)  (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? 15
   ]
 
- testsEj3 = test [
+testsEj3 = test [
     unoxuno [3,1,4,1,5,9] ~=? [[3],[1],[4],[1],[5],[9]],
     unoxuno [1] ~=? [[1]],
     sufijos "Plp" ~=? ["Plp", "lp", "p", ""],
@@ -254,15 +249,13 @@ testsEj7 = test [
   ]
 
 testsEj8a = test [ -- Casos de test para el ejercicio 7
-  
   ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] ~=? ["a", "b"]
   ]
+
 testsEj8b = test [ -- Casos de test para el ejercicio 7
-  
   (++!) preorder inorder (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [1,2,3,4,2,3,1,4]
-                                           -- Caso de test 1 - resultado esperado
   ]
-testsEj8c = test [ -- Casos de test para el ejercicio 7
-  
+
+testsEj8c = test [ 
     (.!) (\z -> [0..z]) (map (+1)) [1,3] ~=? [0,1,2,0,1,2,3,4]
   ]
