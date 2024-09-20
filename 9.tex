@@ -81,10 +81,10 @@ Recordemos que para poder hacer inducción sobre listas necesitamos predicar ace
         \end{itemize}
     \end{itemize}
 \end{itemize}
-\textbf{Lado Izquierdo} \\
+\textbf{Lado Izquierdo}: Para una mayor legibilidad, llamamos pf0 = foldAT($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) \\
 elem x (preorder (Tern r i c d)) \\ 
-$\streq{PR0}$ elem x (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] (Tern r i c d)) \\ 
-$\streq{F1}$ elem x ([r] ++ (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ )) [] i ++ foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] c ++ foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] d) \\ 
+$\streq{PR0}$ elem x (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] (Tern r i c d)) \\ 
+$\streq{F1}$ elem x ([r] ++ (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] i) ++ (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] c) ++ (foldAT ($\backslash$r i c d $\rightarrow$ [r] ++ i ++ c ++ d) [] d)) \\ 
 $\streq{PR0}$ elem x ([r] ++ (preorder i) ++ (preorder c) ++ (preorder d)) \\
 $\streq{E1}$ (x==r) $\|$ elem x ((preorder i) ++ (preorder c) ++ (preorder d)) \\
 Aplicamos el Lema 1 \\
@@ -104,7 +104,7 @@ Veamos ahora, que si desarrollamos desde \textbf{elem x (postorder(Tern r i c d)
 \textbf{Lado Derecho} \\
 elem x (postorder(Tern r i c d)) \\
 $\streq{PS0}$elem x (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] (Tern r i c d))    \\
-$\streq{F1}$elem x ([r] ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] i) ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] c) ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] d) \\
+$\streq{F1}$elem x ([r] ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] i) ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] c) ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] d)) \\
 $\streq{PS0}$elem x([r] ++ postorder i ++ postorder c ++ postorder d) \\
 $\streq{E1}$ (x == r) $||$ elem x (postorder i ++ postorder c ++ postorder(d)) \\
 Nuevamente por Lema 1 \\
