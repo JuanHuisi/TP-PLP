@@ -2,8 +2,6 @@ module Proceso (Procesador, AT(Nil,Tern), RoseTree(Rose), Trie(TrieNodo), foldAT
 import Data.List (nub)
 import Test.HUnit
 
-
-
 --Definiciones de tipos
 
 type Procesador a b = a -> [b]
@@ -90,7 +88,6 @@ procSubTries (TrieNodo _ hijos) = hijos
 
 
 --Ejercicio 2
-
 foldAT :: (a -> b -> b -> b -> b) -> b -> AT a -> b 
 foldAT _ b Nil = b 
 foldAT f b (Tern r i c d)  = f r (foldAT f b i)  (foldAT f b c) (foldAT f b d)
@@ -109,7 +106,6 @@ unoxuno = foldr(\x acc -> [x] : acc) []
 
 sufijos :: Procesador [a] [a]
 sufijos = foldr (\c acc -> (c : if null (head acc) then [] else head acc) : acc) [[]];
---sufijos = foldr(\x acc -> if null(head acc) then x : acc else (x:head acc) : acc) [[]]
 
 --Ejercicio 4
 preorder :: AT a -> [a]
