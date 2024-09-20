@@ -98,7 +98,25 @@ Por extensionalidad de booleanos en la condición de (x==r) tenemos dos casos:
 Esto es verdadero ya que en el caso de un ó lógico basta un True para que todo sea verdadero.  \\  
 \textbf{Caso B}: False $\|$ elem x (preorder i) $\|$ elem x (preorder c) $\|$ elem x (preorder d) \\ 
 $\streq{HI}$ elem x (postorder i) $\|$ elem x (postorder c) $\|$ (postorder d) \\
-\textbf{Lado Derecho}
+
+Veamos ahora, que si desarrollamos desde \textbf{elem x (postorder(Tern r i c d))} y llegamos a aplicar la hipótesis inductiva como esto es una igualdad, basta para que sea verdadero. \\
+
+\textbf{Lado Derecho} \\
+elem x (postorder(Tern r i c d)) \\
+$\streq{PS0}$elem x (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] (Tern r i c d))    \\
+$\streq{F1}$elem x ([r] ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] i) ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] c) ++ (foldAT($\backslash$r i c d $\rightarrow$ [r] ++ d ++ c ++ i) [] d) \\
+$\streq{PS0}$elem x([r] ++ postorder i ++ postorder c ++ postorder d) \\
+$\streq{E1}$ (x == r) $||$ elem x (postorder i ++ postorder c ++ postorder(d)) \\
+Nuevamente por Lema 1 \\
+= (x == r) $||$ elem x (postorder i) $||$ elem x (postorder c) $||$ elem x (postorder d)\\
+Por extensionalidad de booleanos en la condicion de (x == r) tenemos dos casos:
+\begin{itemize}
+    \item A: (x == r) = True
+    \item B: (x == r) = False
+\end{itemize}
+\textbf{Caso A:} True $||$ elem x (postorder i) $||$ elem x (postorder c) $||$ elem x (postorder d) = True \\
+\textbf{Caso B:} False $||$ elem x (postorder i) $||$ elem x (postorder c) $||$ elem x (postorder d) $\\ \streq{HI} $  elem x (preorder i) $||$ elem x (preorder c) $||$ elem x (preorder d) \\
+Luego, como probamos que de ambos lados pudimos aplicar la HI, y la HI es verdadera, entonces sucede que: elem x (preorder $(Tern \ r \ i \ c \ d)$) = elem x (postorder $(Tern \ r \ i \ c \ d)$) como queríamos probar.
 
 \newpage
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
