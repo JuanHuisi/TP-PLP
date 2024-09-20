@@ -222,11 +222,8 @@ testsEj4 = test [
   ]
 
 testsEj5 = test [ -- Casos de test para el ejercicio 5
-  
   preorderRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [1,2,3,4,5],
-
   hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2,3,4,5],
-
   ramasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [[1,2],[1,3],[1,4],[1,5]]
   ]
 
@@ -247,7 +244,9 @@ testsEj8a = test [ -- Casos de test para el ejercicio 7
   ]
 
 testsEj8b = test [ -- Casos de test para el ejercicio 7
-  (++!) preorder inorder (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [1,2,3,4,2,3,1,4]
+  (++!) preorder inorder (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [1,2,3,4,2,3,1,4],
+  (++!) hojasRose hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2, 3, 4, 5, 2, 3, 4, 5],
+  (++!) unoxuno sufijos [1, 2] ~=? [[1], [2], [1, 2], [2], []]
   ]
 
 testsEj8c = test [ 
