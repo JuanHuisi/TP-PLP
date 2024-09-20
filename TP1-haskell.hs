@@ -240,7 +240,8 @@ testsEj7 = test [
   ]
 
 testsEj8a = test [ -- Casos de test para el ejercicio 7
-  ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] ~=? ["a", "b"]
+  ifProc (\x -> x == ["a"]) (\x -> x ++ ["b"]) id ["a"] ~=? ["a", "b"],
+  ifProc (\x -> x == [1, 2]) (\x -> x ++ [3, 4, 5]) id [1, 2] ~=? [1, 2, 3, 4, 5]
   ]
 
 testsEj8b = test [ -- Casos de test para el ejercicio 7
