@@ -118,7 +118,6 @@ Por extensionalidad de booleanos en la condicion de (x == r) tenemos dos casos:
 \textbf{Caso B:} False $||$ elem x (postorder i) $||$ elem x (postorder c) $||$ elem x (postorder d) $\\ \streq{HI} $  elem x (preorder i) $||$ elem x (preorder c) $||$ elem x (preorder d) \\
 Luego, como probamos que de ambos lados pudimos aplicar la HI, y la HI es verdadera, entonces sucede que: elem x (preorder $(Tern \ r \ i \ c \ d)$) = elem x (postorder $(Tern \ r \ i \ c \ d)$) como queríamos probar.
 
-\newpage
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
 $(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
 P(xs) = $(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
