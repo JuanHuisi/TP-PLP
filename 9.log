@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3.31) (preloaded format=pdflatex 2024.4.13)  20 SEP 2024 21:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3.31) (preloaded format=pdflatex 2024.4.13)  20 SEP 2024 21:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -195,71 +195,76 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count289
 
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
+Underfull \hbox (badness 10000) in paragraph at lines 17--19
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--20
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--23
+Underfull \hbox (badness 10000) in paragraph at lines 22--24
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 24--25
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
 
  []
 
 
-Overfull \hbox (0.67126pt too wide) in paragraph at lines 26--27
+Overfull \hbox (0.67126pt too wide) in paragraph at lines 27--28
 \OT1/cmr/m/n/10 cor-re-spon-di-entes: $\OML/cmm/m/it/10 data AT a  \OT1/cmr/m/n/10 =  \OML/cmm/m/it/10 Nil \OMS/cmsy/m/n/10 j \OML/cmm/m/it/10 Tern a \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 AT a\OT1/cmr/m/n/10 ) (\OML/cmm/m/it/10 AT a\OT1/cmr/m/n/10 ) (\OML/cmm/m/it/10 AT a\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 deriving Eq$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
 
  []
 
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 31.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 32.
 (C:\Users\Tom\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 31.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 32.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 32.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 33.
  (C:\Users\Tom\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
  [1
 
 {C:/Users/Tom/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Overfull \hbox (3.00354pt too wide) in paragraph at lines 46--48
+Overfull \hbox (3.00354pt too wide) in paragraph at lines 47--49
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (15.00366pt too wide) in paragraph at lines 49--50
+Overfull \hbox (15.00366pt too wide) in paragraph at lines 50--51
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (4.84535pt too wide) in paragraph at lines 80--81
+Overfull \hbox (4.84535pt too wide) in paragraph at lines 81--82
 []\OT1/cmr/m/n/10 elem x (pre-order $(\OML/cmm/m/it/10 Tern r i c d\OT1/cmr/m/n/10 )$) = elem x (pos-torder $(\OML/cmm/m/it/10 Tern r i c d\OT1/cmr/m/n/10 )$) 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 97--101
+Underfull \hbox (badness 10000) in paragraph at lines 98--102
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--103
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--121
 
  []
 
@@ -272,13 +277,13 @@ L3 programming layer <2024-03-14>
 Here is how much of TeX's memory you used:
  4263 strings out of 474423
  64900 string characters out of 5742662
- 1952496 words of memory out of 5000000
+ 1955496 words of memory out of 5000000
  26578 multiletter control sequences out of 15000+600000
  563480 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,6n,69p,358b,1528s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Tom\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Tom/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 9.pdf (4 pages, 115035 bytes).
+Output written on 9.pdf (4 pages, 115357 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

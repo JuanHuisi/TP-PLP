@@ -14,6 +14,7 @@
 \maketitle
 
 \section{Ejercicio 9}
+\textbf{Nota}: El Lema utilizado está definido en la página 4. \\
 De acuerdo a las definiciones de las funciones para arboles ternarios (AT a) se pide demostrar: $(\forall$t::AT a)($\forall$x::a)(elem x (preorder t) = elem x (postorder t))  \\
 
 Preorder y Postorder son dos maneras diferentes de recorrer un árbol; En este caso en puntual, recorren un árbol ternario.  \\
@@ -116,7 +117,7 @@ Por extensionalidad de booleanos en la condicion de (x == r) tenemos dos casos:
 \end{itemize}
 \textbf{Caso A:} True $||$ elem x (postorder i) $||$ elem x (postorder c) $||$ elem x (postorder d) = True \\
 \textbf{Caso B:} False $||$ elem x (postorder i) $||$ elem x (postorder c) $||$ elem x (postorder d) $\\ \streq{HI} $  elem x (preorder i) $||$ elem x (preorder c) $||$ elem x (preorder d) \\
-Luego, como probamos que de ambos lados pudimos aplicar la HI, y la HI es verdadera, entonces sucede que: elem x (preorder $(Tern \ r \ i \ c \ d)$) = elem x (postorder $(Tern \ r \ i \ c \ d)$) como queríamos probar.
+Luego, como probamos que de ambos lados pudimos aplicar la HI, y la HI es verdadera, entonces sucede que: elem x (preorder $(Tern \ r \ i \ c \ d)$) = elem x (postorder $(Tern \ r \ i \ c \ d)$) como queríamos probar. \\
 
 \textbf{Lema 1}: Vamos a probar la siguiente propiedad sobre inducción estructural sobre xs. \\
 $(\forall xs :: [a])(\forall ys :: [a])(\forall e::a)(elem \ e \ (xs++ys) \ = elem \ e \ xs \ \| \ elem \ e \ ys)$ \\
