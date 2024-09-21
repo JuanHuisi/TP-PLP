@@ -246,6 +246,8 @@ testsEj8b = test [ -- Casos de test para el ejercicio 7
   (++!) unoxuno sufijos [1, 2] ~=? [[1], [2], [1, 2], [2], []]
   ]
 
+
 testsEj8c = test [ 
-    (.!) (\z -> [0..z]) (map (+1)) [1,3] ~=? [0,1,2,0,1,2,3,4]
+    (.!) (\z -> [0..z]) (map (+1)) [1,3] ~=? [0,1,2,0,1,2,3,4],
+    (((.!)) procId procVacio) Nil ~=? ([] :: [AT Int])
   ]
