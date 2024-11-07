@@ -102,7 +102,7 @@ foldTrie fTrie (TrieNodo v h) = fTrie v (map(\(b, subtrie) -> (b, foldTrie fTrie
 
 --Ejercicio 3
 unoxuno :: Procesador [a] [a]
-unoxuno = foldr(\x acc -> [x] : acc) []
+unoxuno = map(:[])
 
 sufijos :: Procesador [a] [a]
 sufijos = foldr (\c acc -> (c : if null (head acc) then [] else head acc) : acc) [[]];
@@ -124,10 +124,10 @@ preorderRose :: Procesador (RoseTree a) a
 preorderRose = foldRose(\r h -> r : concat h)
 
 hojasRose :: Procesador (RoseTree a) a
-hojasRose = undefined {- foldRose(\r x h -> if length x == 0 then [r] else concat h ) -}
+hojasRose =  foldRose(\r h -> if length h == 0 then [r] else concat h) 
 
 ramasRose :: Procesador (RoseTree a) [a]
-ramasRose = undefined {- foldRose (\r _ h -> if null h then [[r]] else concatMap (map (r:)) h); -}
+ramasRose = foldRose (\r h -> if null h then [[r]] else concatMap (map (r:)) h); 
 
 --Ejercicio 6
 caminos :: Trie a -> [[Char]]
@@ -188,8 +188,8 @@ testsEj1 = test [
     procId (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [(Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []])],
     procCola [1, 2, 3] ~=? [2, 3],
     procCola [1] ~=? [],
-   {-  procHijosRose (Rose 1 [Rose 2 [], Rose 5 []]) ~=? [Rose 2 [], Rose 5 []],
-    procHijosRose (Rose 1 [Rose 2 [Rose 10 []], Rose 8 []]) ~=? [Rose 2 [Rose 10 []], Rose 8 []], -}
+    procHijosRose (Rose 1 [Rose 2 [], Rose 5 []]) ~=? [Rose 2 [], Rose 5 []],
+    procHijosRose (Rose 1 [Rose 2 [Rose 10 []], Rose 8 []]) ~=? [Rose 2 [Rose 10 []], Rose 8 []], 
     procHijosAT (Tern 1 Nil Nil Nil) ~=? [Nil, Nil, Nil],
     procHijosAT (Tern 1 (Tern 2 Nil Nil Nil) Nil Nil)  ~=? [(Tern 2 Nil Nil Nil), Nil, Nil],
     procHijosAT (Tern 1 (Tern 2 Nil Nil Nil) Nil (Tern 3 Nil (Tern 4 Nil Nil Nil) Nil))  ~=? [(Tern 2 Nil Nil Nil), Nil, (Tern 3 Nil (Tern 4 Nil Nil Nil) Nil )],
@@ -218,9 +218,9 @@ testsEj4 = test [
   ]
 
 testsEj5 = test [ -- Casos de test para el ejercicio 5
-  preorderRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [1,2,3,4,5]{- ,
+  preorderRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [1,2,3,4,5],
   hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2,3,4,5],
-  ramasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [[1,2],[1,3],[1,4],[1,5]] -}
+  ramasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [[1,2],[1,3],[1,4],[1,5]]  
   ]
 
 testsEj6 = test [ 
@@ -242,7 +242,7 @@ testsEj8a = test [ -- Casos de test para el ejercicio 7
 
 testsEj8b = test [ -- Casos de test para el ejercicio 7
   (++!) preorder inorder (Tern 1 (Tern 2 Nil Nil Nil) (Tern 3 Nil Nil Nil) (Tern 4 Nil Nil Nil)) ~=? [1,2,3,4,2,3,1,4],
-  {- (++!) hojasRose hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2, 3, 4, 5, 2, 3, 4, 5], -}
+  (++!) hojasRose hojasRose (Rose 1 [Rose 2 [], Rose 3 [], Rose 4 [], Rose 5 []]) ~=? [2, 3, 4, 5, 2, 3, 4, 5], 
   (++!) unoxuno sufijos [1, 2] ~=? [[1], [2], [1, 2], [2], []]
   ]
 
